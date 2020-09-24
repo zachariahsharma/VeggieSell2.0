@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline'"
+    />
+    <meta name="description" content="" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Jekyll v4.1.1" />
+    <title>Signin · VeggieSell</title>
+
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/4.5/examples/sign-in/"
+    />
+
+    <!-- Bootstrap core CSS -->
+    <link
+      href="../app/bootstrap-4.5.2-examples/assets/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 50px;
+        /* filter: blur(none); */
+        z-index: -10;
+        margin: 0px;
+      }
+      #img {
+        width: 100vw;
+        height: 100vh;
+        background: url(../app/images/pomegranate.jpg) center no-repeat;
+        background-size: cover;
+        filter: blur(8px);
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+      }
+      /* html {
+        width: 100vw;
+        height: 100vh;
+        background: url(../app/images/pomegranate.jpg) center no-repeat;
+        background-size: cover;
+        filter: blur(8px);
+      } */
+      #back {
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+        z-index: 10;
+      }
+      body {
+        width: 400px;
+        margin-right: auto;
+        margin-left: auto;
+        /* z-index: 10; */
+      }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      #form {
+        padding: 50px 60px;
+        padding-bottom: 100px;
+        /* margin-top: 100px; */
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 10px;
+        border: white 2px solid;
+        z-index: 10;
+      }
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="../app/css/signin.css" rel="stylesheet" />
+  </head>
+  <body class="text-center">
+    <form action="numberauth.html" id="form" class="form-signin rounded-large">
+      <!-- <img
+        class="mb-4"
+        src="../app/bootstrap-4.5.2-examples/assets/brand/bootstrap-solid.svg"
+        alt=""
+        width="72"
+        height="72"
+      /> -->
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input
+        type="email"
+        id="inputEmail"
+        class="form-control"
+        placeholder="Email address"
+        required
+        autofocus
+      />
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input
+        type="password"
+        id="inputPassword"
+        class="form-control"
+        placeholder="Password"
+        required
+      />
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me" /> Remember me
+        </label>
+      </div>
+      <button
+        id="submit"
+        class="btn btn-lg btn-primary btn-block"
+        type="submit"
+      >
+        Sign up
+      </button>
+    </form>
+    <a id="back" href="open.html"
+      ><svg
+        width="3em"
+        height="3em"
+        viewBox="0 0 16 16"
+        class="bi bi-box-arrow-in-left"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"
+        />
+        <path
+          fill-rule="evenodd"
+          d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"
+        />
+      </svg>
+    </a>
+    <div id="img"></div>
+    <script>
+      const { ipcRenderer } = require("electron");
+      const form = document.querySelector("#form");
+      const emailID = document.querySelector("#inputEmail");
+      const passwordID = document.querySelector("#inputPassword");
+      submit.addEventListener("click", (e) => {
+        e.preventDefault();
+        const email = emailID.value;
+        const password = passwordID.value;
+        ipcRenderer.send("signup-info", {
+          email,
+          password,
+        });
+        location.replace("./numberauth.html");
+      });
+    </script>
+  </body>
+</html>

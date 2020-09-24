@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      #img {
+        width: 100vw;
+        height: 100vh;
+        background: url(../app/images/pomegranate.jpg) center no-repeat;
+        background-size: cover;
+        filter: blur(10px);
+      }
+      #container {
+        background-color: rgba(0, 0, 0, 0.8);
+        border: white 2px solid;
+        border-radius: 50px;
+        padding: 50px 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 10px;
+        /* box-shadow: black 5px 10px; */
+        z-index: 2;
+      }
+      input {
+        width: 300px;
+      }
+      form {
+        padding-bottom: 10px;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline'"
+    />
+    <link rel="stylesheet" href="../app/css/style.css" />
+    <link rel="stylesheet" href="../app/css/bootstrap.min.css" />
+    <title>VeggieSell</title>
+  </head>
+  <body>
+    <div id="container">
+      <form action="signup.html">
+        <input type="number" id="text" />
+        <br />
+        <input
+          id="submit"
+          class="btn btn-primary"
+          type="submit"
+          value="Authenticate"
+        />
+      </form>
+    </div>
+    <div id="img"></div>
+    <script>
+      const { ipcRenderer } = require("electron");
+      const text = document.querySelector("#text");
+      const form = document.querySelector("form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const authnum = text.value;
+        ipcRenderer.send("authnum", {
+          authnum,
+        });
+      });
+    </script>
+  </body>
+</html>
